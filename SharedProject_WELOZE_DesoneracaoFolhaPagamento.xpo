@@ -1,0 +1,5398 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : PayrollDischargeGroup unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #PayrollDischargeGroup
+    EnforceFKRelation 1
+    PROPERTIES
+      Name                #PayrollDischargeGroup
+      CreateRecIdIndex    #Yes
+      SaveDataPerCompany  #No
+      PrimaryIndex        #SurrogateKey
+      ClusterIndex        #SurrogateKey
+      Origin              #{EBE63E98-F3AB-4E49-89A6-DE6F0151EC2F}
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #CFOPId_BR
+        STRING
+        PROPERTIES
+          Name                #CFOPId_BR
+          Mandatory           #Yes
+          Table               #PayrollDischargeGroup
+          Origin              #{99706FB3-4AC4-4A04-B94F-7008F1C4C2E5}
+          ExtendedDataType    #CFOPId_BR
+          StringSize          #5
+        ENDPROPERTIES
+        
+      FIELD #PayrollDischargeGroupStatus
+        ENUM
+        PROPERTIES
+          Name                #PayrollDischargeGroupStatus
+          Mandatory           #Yes
+          Table               #PayrollDischargeGroup
+          Origin              #{DC2B4F75-1490-442E-82FE-8096F631104E}
+          ExtendedDataType    #PayrollDischargeGroupStatus
+          EnumType            #NoYes
+        ENDPROPERTIES
+        
+      FIELD #TaxFiscalClassificationId_BR
+        STRING
+        PROPERTIES
+          Name                #TaxFiscalClassificationId_BR
+          Mandatory           #Yes
+          Table               #PayrollDischargeGroup
+          Origin              #{FF6E69BE-A881-4E73-8BBE-6F8B24CE95B9}
+          ExtendedDataType    #TaxFiscalClassificationId_BR
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+      #CFOP_NCM
+      PROPERTIES
+        Name                #CFOP_NCM
+        AllowDuplicates     #No
+        AlternateKey        #Yes
+        Origin              #{12258CAC-8A99-487B-AB8A-4850086DE496}
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #CFOPId_BR
+        #TaxFiscalClassificationId_BR
+      ENDINDEXFIELDS
+      
+    ENDINDICES
+    FULLTEXTINDICES
+    ENDFULLTEXTINDICES
+    REFERENCES
+      REFERENCE #TaxFiscalClassification_BR
+        PROPERTIES
+          Name                #TaxFiscalClassification_BR
+          Table               #TaxFiscalClassification_BR
+          UseDefaultRoleNames #Yes
+        ENDPROPERTIES
+        
+        FIELDREFERENCES
+          REFERENCETYPE NORMAL
+          PROPERTIES
+            Field               #TaxFiscalClassificationId_BR
+            RelatedField        #FiscalClassificationId
+          ENDPROPERTIES
+          
+        ENDFIELDREFERENCES
+      ENDREFERENCE
+      REFERENCE #CFOPTable_BR
+        PROPERTIES
+          Name                #CFOPTable_BR
+          Table               #CFOPTable_BR
+          UseDefaultRoleNames #Yes
+        ENDPROPERTIES
+        
+        FIELDREFERENCES
+          REFERENCETYPE NORMAL
+          PROPERTIES
+            Field               #CFOPId_BR
+            RelatedField        #CFOPId
+          ENDPROPERTIES
+          
+        ENDFIELDREFERENCES
+      ENDREFERENCE
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+    METHODS
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: UTE
+
+; Microsoft Dynamics AX Enum: PayrollDischargeEnabled descarregado
+; --------------------------------------------------------------------------------
+  USERTYPEVERSION 6
+  
+  USERTYPE #PayrollDischargeEnabled
+  ENUM
+    PROPERTIES
+      Name                #PayrollDischargeEnabled
+      Origin              #{1C460036-EBE0-4909-8C39-4A47EFF80ACF}
+      EnumType            #NoYes
+    ENDPROPERTIES
+    
+    TYPEELEMENTS
+    ENDTYPEELEMENTS
+    
+    TYPEREFERENCES
+    ENDTYPEREFERENCES
+    
+    TYPELOOKUPS
+    ENDTYPELOOKUPS
+    
+  ENDUSERTYPE
+  
+
+***Element: UTE
+
+; Microsoft Dynamics AX Enum: PayrollDischargeGroupStatus descarregado
+; --------------------------------------------------------------------------------
+  USERTYPEVERSION 6
+  
+  USERTYPE #PayrollDischargeGroupStatus
+  ENUM
+    PROPERTIES
+      Name                #PayrollDischargeGroupStatus
+      Origin              #{A29620C1-9E36-452F-8BA3-FFEB6E47B710}
+      EnumType            #NoYes
+    ENDPROPERTIES
+    
+    TYPEELEMENTS
+    ENDTYPEELEMENTS
+    
+    TYPEREFERENCES
+    ENDTYPEREFERENCES
+    
+    TYPELOOKUPS
+    ENDTYPELOOKUPS
+    
+  ENDUSERTYPE
+  
+
+***Element: FRM
+
+; Microsoft Dynamics AX Forms unloaded
+; --------------------------------------------------------------------------------
+FRMVERSION 12
+
+FORM #PayrollDischargeGroup
+  PROPERTIES
+    Name                #PayrollDischargeGroup
+    Origin              #{670CB6C5-95D8-4BAD-8A0D-452FC432AC5E}
+  ENDPROPERTIES
+  
+  METHODS
+    SOURCE #classDeclaration
+      #public class FormRun extends ObjectRun
+      #{
+      #}
+    ENDSOURCE
+  ENDMETHODS
+  OBJECTBANK
+    PROPERTIES
+    ENDPROPERTIES
+    
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #PayrollDischargeGroup
+          Table               #PayrollDischargeGroup
+        ENDPROPERTIES
+        
+        FIELDLIST
+          DATAFIELD TaxFiscalClassificationId_BR
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #validate
+                #public boolean validate()
+                #{
+                #    boolean ret;
+                #
+                #    ret = super();
+                #
+                #    if (ret)
+                #    {
+                #
+                #        select firstOnly taxFiscalClassification_BR where taxFiscalClassification_BR.FiscalClassificationId == this.getValue();
+                #        if (!taxFiscalClassification_BR)
+                #        {
+                #            ret = false;
+                #        }
+                #
+                #    }
+                #
+                #    return ret;
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD CFOPId_BR
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #validate
+                #public boolean validate()
+                #{
+                #
+                #    boolean ret;
+                #
+                #    ret = super();
+                #
+                #    if (ret)
+                #    {
+                #
+                #        select firstOnly cfopTable_BR where cfopTable_BR.CFOPId == this.getValue();
+                #        if (!cfopTable_BR)
+                #        {
+                #            ret = false;
+                #        }
+                #
+                #    }
+                #
+                #    return ret;
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #CFOPTable_BR
+          Table               #CFOPTable_BR
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #TaxFiscalClassification_BR
+          Table               #TaxFiscalClassification_BR
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+      ENDMETHODS
+    ENDDATASOURCE
+  ENDOBJECTBANK
+  
+  REFERENCEDATASOURCES
+  ENDREFERENCEDATASOURCES
+  
+  JOINS
+  ENDJOINS
+  
+  PARTREFERENCES
+  ENDPARTREFERENCES
+  
+  DESIGN
+    PROPERTIES
+      Caption             #Grupos de Desoneração da Folha
+      Style               #SimpleListDetails
+    ENDPROPERTIES
+    
+    CONTAINER
+      CONTROL ACTIONPANE
+        PROPERTIES
+          Name                #ActionPane
+          ElementPosition     #715827882
+          Style               #Strip
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL ACTIONPANETAB
+        PROPERTIES
+          Name                #ActionPaneTab
+          ElementPosition     #1431655764
+          HierarchyParent     #ActionPane
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL BUTTONGROUP
+        PROPERTIES
+          Name                #ButtonGroup
+          ElementPosition     #1431655764
+          HierarchyParent     #ActionPaneTab
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL GRID
+        PROPERTIES
+          Name                #Grid
+          Width               #Column width
+          Height              #Column height
+          ElementPosition     #1431655764
+          DataSource          #PayrollDischargeGroup
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL COMBOBOX
+        PROPERTIES
+          Name                #PayrollDischargeGroup_PayrollDischargeGroupStatus
+          ElementPosition     #1717986916
+          HierarchyParent     #Grid
+          Label               #Incentivado?
+          DataSource          #PayrollDischargeGroup
+          DataField           #PayrollDischargeGroupStatus
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL COMMANDBUTTON
+        PROPERTIES
+          Name                #Delete
+          ElementPosition     #1610612733
+          HierarchyParent     #ButtonGroup
+          Text                #Excluir
+          ButtonDisplay       #Text & Image left
+          NormalImage         #10121
+          ImageLocation       #EmbeddedResource
+          SaveRecord          #No
+          Command             #2832
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL COMMANDBUTTON
+        PROPERTIES
+          Name                #New
+          ElementPosition     #1073741822
+          HierarchyParent     #ButtonGroup
+          Text                #Novo
+          ButtonDisplay       #Text & Image left
+          NormalImage         #11045
+          ImageLocation       #EmbeddedResource
+          Command             #260
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL STRINGEDIT
+        PROPERTIES
+          Name                #PayrollDischargeGroup_CFOPId_BR
+          DragDrop            #Manual
+          ElementPosition     #858993458
+          HierarchyParent     #Grid
+          Label               #CFOP
+          DataSource          #PayrollDischargeGroup
+          DataField           #CFOPId_BR
+        ENDPROPERTIES
+        
+        METHODS
+          SOURCE #lookup
+            #public void lookup()
+            #{
+            #
+            #    Query query = new query();
+            #    QueryBuildDataSource queryBuildDataSource = new QueryBuildDataSource();
+            #    QueryBuildRange queryBuildRange = new QueryBuildRange();
+            #
+            #    SysTableLookup sysTableLookup = SysTableLookup::newParameters(tableNum(CFOPTable_BR), this);
+            #    sysTableLookup.addLookupfield(fieldNum(CFOPTable_BR, CFOPid));
+            #    sysTableLookup.performFormLookup();
+            #
+            #    //super();
+            #
+            #}
+          ENDSOURCE
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL STRINGEDIT
+        PROPERTIES
+          Name                #PayrollDischargeGroup_TaxFiscalClassificationId_BR
+          ElementPosition     #1288490187
+          HierarchyParent     #Grid
+          Label               #Classificação Fiscal
+          DataSource          #PayrollDischargeGroup
+          DataField           #TaxFiscalClassificationId_BR
+        ENDPROPERTIES
+        
+        METHODS
+          SOURCE #lookup
+            #public void lookup()
+            #{
+            #
+            #    //Query query = new query();
+            #    //QueryBuildDataSource queryBuildDataSource = new QueryBuildDataSource();
+            #    //QueryBuildRange queryBuildRange = new QueryBuildRange();
+            #
+            #    SysTableLookup sysTableLookup = SysTableLookup::newParameters(tableNum(TaxFiscalClassification_BR), this);
+            #    sysTableLookup.addLookupfield(fieldNum(TaxFiscalClassification_BR, FiscalClassificationId));
+            #    sysTableLookup.performFormLookup();
+            #
+            #    //super();
+            #
+            #}
+          ENDSOURCE
+        ENDMETHODS
+      ENDCONTROL 
+      
+    ENDCONTAINER
+    
+  ENDDESIGN
+  
+  PERMISSIONS #Permissions
+    PROPERTIES
+    ENDPROPERTIES
+    
+    PERMISSIONSET #Read
+      PROPERTIES
+      ENDPROPERTIES
+      
+      FORM #Controls
+      ENDFORM
+      
+    TABLES #Tables
+    ENDTABLES
+    
+  SERVERMETHODS #Server Methods
+  ENDSERVERMETHODS
+  
+ASSOCIATEDFORMS #Associated Forms
+ENDASSOCIATEDFORMS
+
+ENDPERMISSIONSET
+
+PERMISSIONSET #Update
+  PROPERTIES
+  ENDPROPERTIES
+  
+  FORM #Controls
+  ENDFORM
+  
+TABLES #Tables
+ENDTABLES
+
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+ASSOCIATEDFORMS #Associated Forms
+ENDASSOCIATEDFORMS
+
+ENDPERMISSIONSET
+
+PERMISSIONSET #Create
+  PROPERTIES
+  ENDPROPERTIES
+  
+  FORM #Controls
+  ENDFORM
+  
+TABLES #Tables
+ENDTABLES
+
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+ASSOCIATEDFORMS #Associated Forms
+ENDASSOCIATEDFORMS
+
+ENDPERMISSIONSET
+
+PERMISSIONSET #Delete
+  PROPERTIES
+  ENDPROPERTIES
+  
+  FORM #Controls
+  ENDFORM
+  
+TABLES #Tables
+ENDTABLES
+
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+ASSOCIATEDFORMS #Associated Forms
+ENDASSOCIATEDFORMS
+
+ENDPERMISSIONSET
+
+ENDPERMISSIONS
+
+ENDFORM
+
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : PayrollDischargeGroup unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #PayrollDischargeGroup
+    Type: 1
+    PROPERTIES
+      Name                #PayrollDischargeGroup
+      Label               #Grupos de CFOP/NCM para Desoneração da Folha
+      Object              #PayrollDischargeGroup
+      Origin              #{560E5260-92E5-4B85-A24D-524113B9BCB4}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: MNU
+
+; Microsoft Dynamics AX Menu : GeneralLedger unloaded
+; --------------------------------------------------------------------------------
+  MNUVERSION 5
+  
+  MENU #GeneralLedger
+    PROPERTIES
+      Name                #GeneralLedger
+      Label               #@SYS333959
+      SetCompany          #Yes
+      NormalImage         #3484
+      ImageLocation       #EmbeddedResource
+      Origin              #{914423F3-A6F4-4F0B-9AFC-A1DD0CDA0CF3}
+    ENDPROPERTIES
+    
+    MENU #@SYS333846
+      PROPERTIES
+        Name                #Common
+        Label               #@SYS333846
+        NormalImage         #3495
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Contas principais
+          MenuItemName        #MainAccountListPage
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Balancete
+          MenuItemName        #LedgerTrialBalanceListPage
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #EXIM Authorization schemes
+          MenuItemName        #EximAuthorizationSchemesTableListPage_IN
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #EXIM DEPB schemes
+          MenuItemName        #EximDEPBSchemesListPage_IN
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #EXIM EPCG Schemes
+          MenuItemName        #EximEPCGSchemeListPage_IN
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #EXIM Duty Drawback schemes
+          MenuItemName        #EximDBKSchemesTable_IN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Deferrals
+          MenuItemName        #RDeferralsTableListPage
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Advanced ledger entries
+          MenuItemName        #AdvancedLedgerEntryListPage
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Receivers
+          MenuItemName        #LvOtherClients
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+    ENDMENU
+    MENU #@SYS333879
+      PROPERTIES
+        Name                #Journals
+        Label               #@SYS333879
+        NormalImage         #3475
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Diário geral
+          MenuItemName        #LedgerJournalTable3
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Alocação
+          MenuItemName        #LedgerJournalTable_Allocation
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Eliminação
+          MenuItemName        #LedgerJournalTable_Elimination
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Deferrals journal
+          MenuItemName        #LedgerJournalTableRDeferrals
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Tax register journal
+          MenuItemName        #RTax25RegisterJournalTable
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Chinese vouchers
+          MenuItemName        #LedgerJournalVoucher_CN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Todos as notas fiscais de transferência ou apropriação de imposto
+          MenuItemName        #TaxFiscalDocumentListPage_BR
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+    ENDMENU
+    MENU #@SYS333856
+      PROPERTIES
+        Name                #Inquiries
+        Label               #@SYS333856
+        NormalImage         #3474
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENU #@GLS63553
+        PROPERTIES
+          Name                #FiscalDocuments
+          Label               #@GLS63553
+          CountryRegionCodes  #BR
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Todas as notas fiscais
+            MenuItemName        #FiscalDocumentListPage_BR
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Notas fiscais rejeitadas com cancelamento pendente
+            MenuItemName        #FiscalDocumentLPCancelPending_BR
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Notas fiscais com atualização pendente para o modo de contingência
+            MenuItemName        #FiscalDocumentLPContigencyPending_BR
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENUITEM
+        PROPERTIES
+          Name                #Comprovantes de transações
+          MenuItemName        #LedgerTransVoucher
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Trilha de auditoria
+          MenuItemName        #TransactionLog
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Linhas da ordem de venda, incluindo o imposto de embalagem
+          MenuItemName        #TaxPackagingTaxSales
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Consolidações
+          MenuItemName        #LedgerConsolidateHist
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Entradas no diário-razão auxiliar ainda não transferidas
+          MenuItemName        #SubledgerJournalTransfer
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Daily ledger
+          MenuItemName        #LedgerDailyLedger_CN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Detail ledger
+          MenuItemName        #LedgerDetailLedger_CN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Contabilidade
+          MenuItemName        #LedgerGeneralLedger_CN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Summarized general ledger
+          MenuItemName        #LedgerSummarizedGL_CN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Trial balance
+          MenuItemName        #LedgerTrialBalance_CN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@SYS333961
+        PROPERTIES
+          Name                #Tax
+          Label               #@SYS333961
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto lançado
+            MenuItemName        #TaxTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto retido na fonte lançado
+            MenuItemName        #TaxWithholdTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Liquidações de imposto retido na fonte lançadas
+            MenuItemName        #TaxWithholdReportVoucherInterval_TH
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Liquidações de imposto retido na fonte do intervalo
+            MenuItemName        #TaxWithholdReportVoucherInterval
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@GLS6069
+          PROPERTIES
+            Name                #IndiaPostedTax_IN
+            Label               #@GLS6069
+            CountryRegionCodes  #IN
+          ENDPROPERTIES
+          
+          MENU #@GLS5005
+            PROPERTIES
+              Name                #Excise_IN
+              Label               #@GLS5005
+              CountryRegionCodes  #IN
+            ENDPROPERTIES
+            
+            MENUITEM
+              PROPERTIES
+                Name                #Excise register
+                MenuItemName        #ExciseRegisterInquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+            MENUITEM
+              PROPERTIES
+                Name                #Excise
+                MenuItemName        #ExciseInquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+            MENUITEM
+              PROPERTIES
+                Name                #Excise register balance
+                MenuItemName        #ExciseRegisterBalanceInquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+            MENUITEM
+              PROPERTIES
+                Name                #Annexure 58
+                MenuItemName        #ExciseAnnexure58Inquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+            MENUITEM
+              PROPERTIES
+                Name                #Inter unit transaction register
+                MenuItemName        #ExciseInterUnitTransactionRegSetting_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+          ENDMENU
+          MENU #@GLS5004
+            PROPERTIES
+              Name                #VAT_IN
+              Label               #@GLS5004
+            ENDPROPERTIES
+            
+            MENUITEM
+              PROPERTIES
+                Name                #VAT deferment
+                MenuItemName        #VATDeferment_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+            MENUITEM
+              PROPERTIES
+                Name                #VAT
+                MenuItemName        #VATInquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+          ENDMENU
+          MENU #@GLS5536
+            PROPERTIES
+              Name                #IndiaSalesTax_IN
+              Label               #@GLS5536
+              SecurityKey         #LedgerInquiries
+            ENDPROPERTIES
+            
+            MENUITEM
+              PROPERTIES
+                Name                #India sales tax
+                MenuItemName        #SalesTaxInquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+          ENDMENU
+          MENUITEM
+            PROPERTIES
+              Name                #Indirect tax
+              MenuItemName        #IndirectTaxInquiry_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENU #@GLS5007
+            PROPERTIES
+              Name                #Customs_IN
+              Label               #@GLS5007
+              CountryRegionCodes  #IN
+            ENDPROPERTIES
+            
+            MENUITEM
+              PROPERTIES
+                Name                #Customs
+                MenuItemName        #CustomsInquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+          ENDMENU
+          MENU #@SYS33817
+            PROPERTIES
+              Name                #WithholdingTaxInquiry_IN
+              Label               #@SYS33817
+              CountryRegionCodes  #IN
+            ENDPROPERTIES
+            
+            MENUITEM
+              PROPERTIES
+                Name                #TDS
+                MenuItemName        #TDSInquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+            MENUITEM
+              PROPERTIES
+                Name                #TCS
+                MenuItemName        #TCSInquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+          ENDMENU
+          MENU #@GLS5006
+            PROPERTIES
+              Name                #ServiceTax_IN
+              Label               #@GLS5006
+              SecurityKey         #LedgerInquiries
+              CountryRegionCodes  #IN
+            ENDPROPERTIES
+            
+            MENUITEM
+              PROPERTIES
+                Name                #Service tax
+                MenuItemName        #ServiceTaxInquiry_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+            MENUITEM
+              PROPERTIES
+                Name                #Service tax register balance
+                MenuItemName        #ServiceTaxBalanceInquirySetting_IN
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+          ENDMENU
+        ENDMENU
+      ENDMENU
+      MENUITEM
+        PROPERTIES
+          Name                #Voucher continuity check log (China)
+          MenuItemName        #LedgerVoucherRenumberLog_CN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@GLS106718
+        PROPERTIES
+          Name                #AccountActivity_RU
+          Label               #@GLS106718
+          CountryRegionCodes  #RU
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Contabilidade
+            MenuItemName        #RLedgerSheetGeneralLedger
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Turnover sheet with correspondence
+            MenuItemName        #RLedgerSheetTurnoverBond
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Journal order / account activity
+            MenuItemName        #RLedgerSheetAccountOrder
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Review of account
+            MenuItemName        #RLedgerSheetAccountReview
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS4081771
+        PROPERTIES
+          Name                #RLedgerTurnover
+          Label               #@SYS4081771
+          CountryRegionCodes  #RU
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Contabilidade
+            MenuItemName        #RLedgerTurnoverTypeLedger
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Customer turnover register
+            MenuItemName        #RLedgerTurnoverTypeCust
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Vendor turnover register
+            MenuItemName        #RLedgerTurnoverTypeVend
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Advance holder turnover register
+            MenuItemName        #RLedgerTurnoverTypeEmpl
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Report archive
+            MenuItemName        #RLedgerTurnoverReportArchive
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333860
+      PROPERTIES
+        Name                #Reports
+        Label               #@SYS333860
+        NormalImage         #3477
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Management Reporter
+          MenuItemType        #Action
+          MenuItemName        #ManagementReporter
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Trilha de Auditoria
+          MenuItemType        #Output
+          MenuItemName        #LedgerAuditTrail
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@SYS333962
+        PROPERTIES
+          Name                #BaseData
+          Label               #@SYS333962
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Plano de contas
+            MenuItemType        #Output
+            MenuItemName        #LedgerAccountSched
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Códigos de imposto
+            MenuItemType        #Output
+            MenuItemName        #TaxTablePrint
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Deferrals listing
+            MenuItemType        #Output
+            MenuItemName        #RDeferralsListing
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Deferrals transaction listing
+            MenuItemType        #Output
+            MenuItemName        #RDeferralsTransactionListing
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS333963
+          PROPERTIES
+            Name                #Various
+            Label               #@SYS333963
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Códigos de relatório de imposto
+              MenuItemType        #Output
+              MenuItemName        #TaxCodeReportSetup
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Verificar série de comprovante
+              MenuItemType        #Output
+              MenuItemName        #LedgerCheckVoucher
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Itens incluindo imposto de embalagem
+              MenuItemType        #Output
+              MenuItemName        #TaxPackagingTaxItem
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Definição de regras de alocação
+              MenuItemType        #Output
+              MenuItemName        #LedgerAllocationRuleTable
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Definição de regras de eliminação
+              MenuItemType        #Output
+              MenuItemName        #LedgerEliminationRulesReport
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Restrições de lançamento por usuário
+              MenuItemType        #Output
+              MenuItemName        #LedgerJournalPostControlByUser
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Restrições de lançamento por tipo de diário
+              MenuItemType        #Output
+              MenuItemName        #LedgerJournalPostControlByJournalType
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Deferrals balances
+              MenuItemType        #Output
+              MenuItemName        #RDeferralsBalances
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Factors for deferrals writing off
+              MenuItemType        #Output
+              MenuItemName        #RDeferralsWritingOffFactor
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #GST report by configuration
+              MenuItemType        #Output
+              MenuItemName        #TaxGSTTaxTransReport_MY
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS333964
+        PROPERTIES
+          Name                #External
+          Label               #@SYS333964
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Gerador de relatórios financeiros
+            MenuItemName        #LedgerRRGPreview_RU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lista de documentos eletrônicos
+            MenuItemName        #LedgerRRGEDocuments_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto anual (Áustria)
+            MenuItemType        #Output
+            MenuItemName        #TaxReportYearly_AT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Serviços internacionais
+            MenuItemType        #Output
+            MenuItemName        #LedgerReport_XBorderActivityAT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Diário fiscal
+            MenuItemType        #Output
+            MenuItemName        #LedgerReport_FiscalJournal_IT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Relatórios ISR
+            MenuItemType        #Output
+            MenuItemName        #ISRProvisionalDetailedHelper_MX
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto de compra
+            MenuItemType        #Output
+            MenuItemName        #TaxPurchaseTaxReport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Pagamentos de imposto
+            MenuItemName        #TaxReportVoucher
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Japanese sales tax report
+            MenuItemType        #Action
+            MenuItemName        #TaxReport_JP
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS7372
+          PROPERTIES
+            Name                #WithholdingTax
+            Label               #@SYS7372
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto retido na fonte
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdReport_TH
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto retido na fonte (doméstico)
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdReportDomestic_TH
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto retido na fonte (estrangeiro)
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdReportForeign_TH
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto retido na fonte (individual)
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdReportIndividual_TH
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto retido na fonte (Por Ngor Dor 2)
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdReportPND2_TH
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto retido na fonte (Por Ngor Dor 3)
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdReportPND3_TH
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto retido na fonte (Por Ngor Dor 53)
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdReportPND53_TH
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Relatório mensal de imposto retido na fonte da Arábia Saudita
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdMonthlyReport_SA
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Relatório anual de imposto retido na fonte da Arábia Saudita
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdYearlyReport_SA
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Withholding tax special
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdSpecial
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Withholding tax accounts receivable journal report
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdSalesJournal
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Withholding tax accounts payable journal report
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdPurchJournal
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS341094
+          PROPERTIES
+            Name                #OtherTax
+            Label               #@SYS341094
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto de entrada
+              MenuItemType        #Output
+              MenuItemName        #TaxReportUnrealized_Input
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Input sales tax (for internal use)
+              MenuItemType        #Output
+              MenuItemName        #TaxReportUnrealized_InputDetail
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto de saída
+              MenuItemType        #Output
+              MenuItemName        #TaxReportUnrealized_Output
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Output sales tax (for internal use)
+              MenuItemType        #Output
+              MenuItemName        #TaxReportUnrealized_OutputDetail
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Purchase Unrealized VAT Remaining
+              MenuItemType        #Output
+              MenuItemName        #TaxUnrealizedVATRemaining
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Average VAT
+              MenuItemType        #Output
+              MenuItemName        #TaxAverageVATReport
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto retido na fonte - certificação
+            MenuItemType        #Output
+            MenuItemName        #TaxWithholdCertificationIT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto retido na fonte - mensal
+            MenuItemType        #Output
+            MenuItemName        #TaxWithholdMonthlyReportIT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto retido na fonte - anual
+            MenuItemType        #Output
+            MenuItemName        #TaxWithholdYearlyReportIT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Withholding tax - Model 770
+            MenuItemName        #TaxReport770Table_IT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Comunicação de imposto anual
+            MenuItemName        #TaxYearlyCom_IT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Relatório de lista de bloqueios italiano
+            MenuItemName        #BlackListTable_IT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Italian domestic tax transactions
+            MenuItemName        #TaxReportDomesticTable_IT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Spanish payments due date compliance report
+            MenuItemType        #Output
+            MenuItemName        #DueDateCompliance_ES
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #VAT declaration
+            MenuItemType        #Output
+            MenuItemName        #LedgerVATDeclaratoin_RU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS320437
+          PROPERTIES
+            Name                #ReportsAIF
+            Label               #@SYS320437
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Lista de faturas de 2016 (Hungria)
+              MenuItemType        #Output
+              MenuItemName        #AifOutboundPortReportInvoiceListHU
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS333966
+        PROPERTIES
+          Name                #France
+          Label               #@SYS333966
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Lista de saldo com contas de total do grupo
+            MenuItemType        #Output
+            MenuItemName        #LedgerReport_AccountSum_FR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Totais contábeis por períodos
+            MenuItemType        #Output
+            MenuItemName        #LedgerReport_PeriodSum_fr
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lista de transações por conta
+            MenuItemType        #Output
+            MenuItemName        #LedgerReport_TransAccountVoucher_Fr
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lista de transações por data ou por comprovante
+            MenuItemType        #Output
+            MenuItemName        #LedgerReport_TransDateVoucher_Fr
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333967
+        PROPERTIES
+          Name                #Journals
+          Label               #@SYS333967
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Diários financeiros
+            MenuItemType        #Output
+            MenuItemName        #LedgerFinancialJournalReportBE
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Entradas do diário geral que não foram lançadas
+            MenuItemType        #Output
+            MenuItemName        #LedgerOpenTransactions
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Outros diários
+            MenuItemType        #Output
+            MenuItemName        #LedgerOtherJournalReportBE
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Diários gerais
+            MenuItemType        #Output
+            MenuItemName        #LedgerCentralisationJournalReportBE
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Transações lançadas pelo diário
+            MenuItemType        #Output
+            MenuItemName        #LedgerTransPerJournal
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lista de diários de lançamento
+            MenuItemType        #Output
+            MenuItemName        #LedgerPostingJournalList
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lista de diários de lançamento - Total
+            MenuItemType        #Output
+            MenuItemName        #LedgerPostingJournalTotal
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imprimir diário
+            MenuItemType        #Output
+            MenuItemName        #LedgerJournal
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Diários de compra
+            MenuItemType        #Output
+            MenuItemName        #LedgerPurchaseJournalReportBE
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Diários de venda
+            MenuItemType        #Output
+            MenuItemName        #LedgerSalesJournalReportBE
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Register lines
+            MenuItemType        #Output
+            MenuItemName        #RTax25RegisterTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Facture accounting journal
+            MenuItemType        #Output
+            MenuItemName        #FactureAccountingJournal_RU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Transações de entrada no razão avançado lançadas
+            MenuItemType        #Output
+            MenuItemName        #AdvancedLedgerEntryPostedTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS5000
+        PROPERTIES
+          Name                #India_IN
+          Label               #@GLS5000
+          CountryRegionCodes  #IN
+        ENDPROPERTIES
+        
+        MENU #@GLS5470
+          PROPERTIES
+            Name                #TDS
+            Label               #@GLS5470
+            CountryRegionCodes  #IN
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #TDS statement
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdStatementTDS
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@GLS5471
+          PROPERTIES
+            Name                #TCS
+            Label               #@GLS5471
+            CountryRegionCodes  #IN
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #TCS statement
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdStatementTCS
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #TCS certificate
+              MenuItemType        #Output
+              MenuItemName        #TaxWithholdCertificateTCS
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@GLS5005
+          PROPERTIES
+            Name                #Excise
+            Label               #@GLS5005
+            CountryRegionCodes  #IN
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Daily stock account register
+              MenuItemType        #Output
+              MenuItemName        #ExciseDSARegister_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Personal ledger account register
+              MenuItemType        #Output
+              MenuItemName        #ExcisePLARegister_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #CENVAT credit utilization (debit)
+              MenuItemType        #Output
+              MenuItemName        #ExciseCenvatUtilization_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Excise register part I
+              MenuItemType        #Output
+              MenuItemName        #ExciseRGRegisterPartI_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Excise register part II
+              MenuItemType        #Output
+              MenuItemName        #ExciseRGRegisterPartII_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Purchase and sales register
+              MenuItemType        #Output
+              MenuItemName        #ExcisePurchaseSalesRegister_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Excise RG23D register report
+              MenuItemType        #Output
+              MenuItemName        #ExciseRG23DRegisterReport_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Quarterly return for traders
+              MenuItemType        #Output
+              MenuItemName        #ExciseQuarterlyReturn_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Sample register
+              MenuItemType        #Output
+              MenuItemName        #ExciseSampleRegister_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS333968
+        PROPERTIES
+          Name                #MexicanTaxReports
+          Label               #@SYS333968
+          CountryRegionCodes  #MX
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Gerar declaração DIOT
+            MenuItemType        #Output
+            MenuItemName        #DIOTDeclarationReport_MX
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto de compra
+            MenuItemType        #Output
+            MenuItemName        #TaxVatPurchReport_MX
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto
+            MenuItemType        #Output
+            MenuItemName        #TaxVatSalesReport_MX
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto resumido
+            MenuItemType        #Output
+            MenuItemName        #TaxVatSummaryReport_MX
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Electronic ledger accounting statement
+            MenuItemType        #Action
+            MenuItemName        #ELedgerAccountingStatement_MX
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333969
+        PROPERTIES
+          Name                #Project
+          Label               #@SYS333969
+        ENDPROPERTIES
+        
+        MENU #@SYS333970
+          PROPERTIES
+            Name                #Reconciliation
+            Label               #@SYS333970
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Reconciliação do razão - Alocação de folha de pagamento
+              MenuItemType        #Output
+              MenuItemName        #ProjListLedgerReconPayroll
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Reconciliação do razão - lucros e perdas
+              MenuItemType        #Output
+              MenuItemName        #ProjListLedgerReconProfitLoss
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Reconciliação do razão - WIP
+              MenuItemType        #Output
+              MenuItemName        #ProjListLedgerReconWIP
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Reconciliação - Contas WIP
+              MenuItemType        #Output
+              MenuItemName        #ProjListLedgerReconWIPAccount
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS333971
+          PROPERTIES
+            Name                #Transaction
+            Label               #@SYS333971
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Atualizações do razão - Consumo
+              MenuItemType        #Output
+              MenuItemName        #ProjListLedgerUpdatesConsumption
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Atualizações do razão - por conta
+              MenuItemType        #Output
+              MenuItemName        #ProjListLedgerUpdatesOnAccount
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Atualizações do razão - Alocação de folha de pagamento
+              MenuItemType        #Output
+              MenuItemName        #ProjListLedgerUpdatesPayroll
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Atualizações do razão - lucros e perdas
+              MenuItemType        #Output
+              MenuItemName        #ProjListLedgerUpdatesProfitLoss
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Atualizações do razão - WIP
+              MenuItemType        #Output
+              MenuItemName        #ProjListLedgerUpdatesWIP
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS333972
+        PROPERTIES
+          Name                #Reconciliation
+          Label               #@SYS333972
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Banco
+            MenuItemType        #Output
+            MenuItemName        #BankLedgerReconciliation
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Cash
+            MenuItemType        #Output
+            MenuItemName        #RCashLedgerReconciliation
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS333973
+          PROPERTIES
+            Name                #Customer
+            Label               #@SYS333973
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Cliente
+              MenuItemType        #Output
+              MenuItemName        #CustLedgerReconciliation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto por cliente
+              MenuItemType        #Output
+              MenuItemName        #TaxAmountByCustomer
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Transações de imposto relativas a vendas
+              MenuItemType        #Output
+              MenuItemName        #TaxSalesLedger
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS333976
+          PROPERTIES
+            Name                #SalesTax
+            Label               #@SYS333976
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Reconciliação de imposto islandês
+              MenuItemType        #Output
+              MenuItemName        #TaxReconciliationReport_IS
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Declarações resumidas de imposto INTERVAT
+              MenuItemType        #Output
+              MenuItemName        #TaxReportIntervat
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Reconciliação de impostos da Noruega
+              MenuItemType        #Output
+              MenuItemName        #TaxReconciliationReport_NO
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto
+              MenuItemType        #Output
+              MenuItemName        #TaxReport_LedgerReconciliation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Desvios de imposto
+              MenuItemType        #Output
+              MenuItemName        #TaxDeviation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Especificação
+              MenuItemType        #Output
+              MenuItemName        #TaxTransCode
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS333977
+          PROPERTIES
+            Name                #Specification
+            Label               #@SYS333977
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Abrir transações do razão
+              MenuItemType        #Output
+              MenuItemName        #LedgerReport_TransOpen
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Origem da transação
+              MenuItemType        #Output
+              MenuItemName        #LedgerTransBase
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS333978
+          PROPERTIES
+            Name                #Vendor
+            Label               #@SYS333978
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Ônus
+              MenuItemType        #Output
+              MenuItemName        #LedgerEncumbranceReconciliation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Transações de imposto relativas a compras
+              MenuItemType        #Output
+              MenuItemName        #TaxPurchLedger
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto por fornecedor
+              MenuItemType        #Output
+              MenuItemName        #TaxAmountByVendor
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Fornecedor
+              MenuItemType        #Output
+              MenuItemName        #VendLedgerReconciliation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS333979
+        PROPERTIES
+          Name                #Transactions
+          Label               #@SYS333979
+        ENDPROPERTIES
+        
+        MENU #@SYS8782
+          PROPERTIES
+            Name                #Periodic
+            Label               #@SYS8782
+          ENDPROPERTIES
+          
+          MENU #@GLS109155
+            PROPERTIES
+              Name                #VatRegisters
+              Label               #@GLS109155
+            ENDPROPERTIES
+            
+            MENUITEM
+              PROPERTIES
+                Name                #Sales VAT register
+                MenuItemType        #Output
+                MenuItemName        #TaxVatRegisterSales
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+            MENUITEM
+              PROPERTIES
+                Name                #Purchase VAT register
+                MenuItemType        #Output
+                MenuItemName        #TaxVatRegisterPurch
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+            MENUITEM
+              PROPERTIES
+                Name                #EU summary VAT register
+                MenuItemType        #Output
+                MenuItemName        #TaxVatRegisterWNT
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+          ENDMENU
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Livro diário
+            MenuItemType        #Output
+            MenuItemName        #LedgerJournalDayBook_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Razão analítico
+            MenuItemType        #Output
+            MenuItemName        #LedgerJournalAnalytReason_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lista de saldos
+            MenuItemType        #Output
+            MenuItemName        #LedgerTotalAndBalanceList
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Gráfico de Entrada de Caixa versus Saída de Caixa
+            MenuItemType        #Output
+            MenuItemName        #CustCashInflowvsCashOutflow
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Transações de fechamento de ano
+            MenuItemType        #Output
+            MenuItemName        #LedgerTransferOpening
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Demonstrativo de dimensão
+            MenuItemType        #Output
+            MenuItemName        #LedgerDimensionTransStatement
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Gráfico de Caixa Esperado nos Próximos X Dias
+            MenuItemType        #Output
+            MenuItemName        #CustExpectedCashNextXDays
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Demonstrativo financeiro (tradicional)
+            MenuItemType        #Output
+            MenuItemName        #LedgerBalanceSheetDimPrint
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Turnover and balances statement
+            MenuItemType        #Output
+            MenuItemName        #LedgerTurnoverAndBalance
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS333980
+          PROPERTIES
+            Name                #Groupings
+            Label               #@SYS333980
+          ENDPROPERTIES
+          
+          MENU #@SYS306036
+            PROPERTIES
+              Name                #Hungary
+              Label               #@SYS306036
+              MenuItemType        #Output
+              CountryRegionCodes  #HU
+            ENDPROPERTIES
+            
+            MENUITEM
+              PROPERTIES
+                Name                #Transações de imposto - detalhes
+                MenuItemType        #Output
+                MenuItemName        #TaxTransDetail_HU
+              ENDPROPERTIES
+              
+            ENDMENUITEM
+          ENDMENU
+          MENUITEM
+            PROPERTIES
+              Name                #Demonstrativo da conta por moeda
+              MenuItemType        #Output
+              MenuItemName        #LedgerAccountStatemenPerCurrency
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Gráfico de lucro bruto em períodos passados
+              MenuItemType        #Output
+              MenuItemName        #LedgerGrossProfitPastXPeriods
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Pagamento de imposto por código
+              MenuItemType        #Output
+              MenuItemName        #TaxReportById
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Especificação de imposto por transação do razão
+              MenuItemType        #Output
+              MenuItemName        #TaxSpecPerLedgerTrans
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Transações de imposto - detalhes
+              MenuItemType        #Output
+              MenuItemName        #TaxTransDetail
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Gráfico do Total de Despesas por Período
+              MenuItemType        #Output
+              MenuItemName        #LedgerTotalExpensebyPeriod
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Lista de transações por data
+              MenuItemType        #Output
+              MenuItemName        #LedgerTransListDate
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Supply list by tax code
+              MenuItemType        #Output
+              MenuItemName        #TaxGSTReportSalesListByTaxCode_MY
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Purchase list by tax code
+              MenuItemType        #Output
+              MenuItemName        #TaxGSTReportPurchListByTaxCode_MY
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto (Itália)
+            MenuItemType        #Output
+            MenuItemName        #TaxReport_IT
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lista de transações do razão
+            MenuItemType        #Output
+            MenuItemName        #LedgerTransListAccount
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lista de impostos
+            MenuItemType        #Output
+            MenuItemName        #TaxList
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Transações de imposto
+            MenuItemType        #Output
+            MenuItemName        #TaxTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Declaração de imposto de importação
+            MenuItemType        #Output
+            MenuItemName        #TaxReportAlandImport_FI
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Balancete detalhado
+            MenuItemType        #Output
+            MenuItemName        #LedgerTrialBalance
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Balancete de resumo
+            MenuItemType        #Output
+            MenuItemName        #LedgerTrialBalanceSummary
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Resumo do balancete
+            MenuItemType        #Output
+            MenuItemName        #LedgerTrialBalance_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Transações de impostos retidos na fonte
+            MenuItemType        #Output
+            MenuItemName        #TaxWithholdTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Chinese voucher continuity check report
+            MenuItemType        #Output
+            MenuItemName        #LedgerVoucherRenumberLog_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imprimir termo de abertura ou fechamento
+            MenuItemType        #Output
+            MenuItemName        #LedgerReport_OpenCloseTerm_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Plano de contas
+            MenuItemType        #Output
+            MenuItemName        #LedgerJournalCOA_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Balance sheet
+            MenuItemType        #Output
+            MenuItemName        #LedgerBalanceSheet
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Ledger statement
+            MenuItemType        #Output
+            MenuItemName        #LedgerStatement
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Cash receipts usage report
+            MenuItemType        #Output
+            MenuItemName        #CashReceiptsUsageReportLV
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS63261
+        PROPERTIES
+          Name                #AsiaReport
+          Label               #@GLS63261
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Daily summary report (China)
+            MenuItemType        #Output
+            MenuItemName        #LedgerDailySummaryReport_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Cash daily report (China)
+            MenuItemType        #Output
+            MenuItemName        #LedgerCashDaily
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Cash status report (China)
+            MenuItemType        #Output
+            MenuItemName        #LedgerCashStatus
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Matrix account report (China)
+            MenuItemType        #Output
+            MenuItemName        #LedgerMatrixAccount_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Matrix dimension
+            MenuItemType        #Output
+            MenuItemName        #LedgerMatrixDimension_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Matrix report with dimensions
+            MenuItemType        #Output
+            MenuItemName        #LedgerMatrixReportWithDim_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Account analysis by dimensions
+            MenuItemType        #Output
+            MenuItemName        #LedgerAccountAnalysisByDimension
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Plano de contas por dimensões
+            MenuItemType        #Output
+            MenuItemName        #LedgerChartofAccountsbyDimensions_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Transações do razão por dimensões
+            MenuItemType        #Output
+            MenuItemName        #LedgerTransactionsbyDimension_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Ledger transactions including dimension details
+            MenuItemType        #Output
+            MenuItemName        #LedgerDetailedTransactionsbyDim_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Account balance sheet by dimensions
+            MenuItemType        #Output
+            MenuItemName        #LedgerAccountBalSheetByDim
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333865
+      PROPERTIES
+        Name                #Periodic
+        Label               #@SYS333865
+        NormalImage         #3476
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Reavaliação de moeda estrangeira
+          MenuItemType        #Action
+          MenuItemName        #LedgerExchAdj
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Liquidações do razão
+          MenuItemName        #LedgerTransSettlement
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Manual correspondence
+          MenuItemName        #LedgerBondManual_RU
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Recalcular períodos contábeis
+          MenuItemType        #Action
+          MenuItemName        #LedgerPeriodRecalculation
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Processar solicitação de alocação
+          MenuItemType        #Action
+          MenuItemName        #LedgerAllocationRequest
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Transferência em lote para diários-razão auxiliares
+          MenuItemType        #Action
+          MenuItemName        #SubledgerJournalTransferController
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Exportar transações do razão
+          MenuItemType        #Action
+          MenuItemName        #LedgerYearAccountDiskBEL
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Importar taxas de câmbio de moeda
+          MenuItemType        #Action
+          MenuItemName        #ExchangeRateImportController
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Arquivo de auditoria holandês
+          MenuItemType        #Action
+          MenuItemName        #LedgerAuditFile_NL
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Exportação SIE
+          MenuItemType        #Action
+          MenuItemName        #LedgerSIEExportFile
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Exportar dados financeiros para XBRL
+          MenuItemType        #Action
+          MenuItemName        #LedgerXBRLReporter
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #VAT register transactions
+          MenuItemName        #RegisterVAT_W
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #VAT reporting
+          MenuItemName        #TaxReporting_W
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Transferência de Arquivos pela Internet GST/HST (GIFT)
+          MenuItemType        #Action
+          MenuItemName        #LedgerGenerateGIFTFile_CA
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Ajuste de inflação B-10
+          MenuItemName        #InflationAdjJournal_MX
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Tax on natural resources
+          MenuItemName        #LvNRTaxTrans
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Replace RCOAD with RCM
+          MenuItemType        #Action
+          MenuItemName        #LedgerRCOADReplacer_RU
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@SYP4314162
+        PROPERTIES
+          Name                #CommissionTrade
+          Label               #@SYP4314162
+          CountryRegionCodes  #RU
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Report for principal
+            MenuItemName        #CommReportJour_RU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS5000
+        PROPERTIES
+          Name                #India
+          Label               #@GLS5000
+          CountryRegionCodes  #IN
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Form reference details
+            MenuItemName        #TransitDocumentDetails_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Abatement certificate
+            MenuItemType        #Action
+            MenuItemName        #AbatementPeriodicCertificate_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #EXIM duty drawback
+            MenuItemType        #Action
+            MenuItemName        #EximApplyDutyDrawback_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #VAT deferment
+            MenuItemType        #Action
+            MenuItemName        #VATDefermentBalForm_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Tax deferment
+            MenuItemName        #TaxDefermentClaim_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Batch reclaim for service tax
+            MenuItemType        #Action
+            MenuItemName        #ServiceTaxPOTInquiryBatch_Reclaim_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Batch reversal for service tax
+            MenuItemType        #Action
+            MenuItemName        #ServiceTaxPOTInquiryBatch_Reversal_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Post service tax reversal or reclaim
+            MenuItemType        #Action
+            MenuItemName        #ServiceTaxPOTInquiryBase_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS103666
+        PROPERTIES
+          Name                #Deferals_RU
+          Label               #@GLS103666
+          ConfigurationKey    #LedgerBasic
+          CountryRegionCodes  #RU
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Deferrals creating
+            MenuItemName        #RTax25StdSeqCalc_Deferrals
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Writing off factor calculation
+            MenuItemName        #RDeferralsFactorCalculation
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Deferrals counting journal
+            MenuItemName        #RDeferralsCountingJournal
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Create receipt transactions
+            MenuItemType        #Action
+            MenuItemName        #RDeferralsCreateReceiptTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333981
+        PROPERTIES
+          Name                #Journals
+          Label               #@SYS333981
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Diários periódicos
+            MenuItemName        #LedgerJournalTable2
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lançar diários
+            MenuItemType        #Action
+            MenuItemName        #LedgerJournalMultiPost
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lançamento em diário
+            MenuItemType        #Action
+            MenuItemName        #LedgerJournalizeTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Lançamento em diário (Espanha)
+            MenuItemType        #Action
+            MenuItemName        #LedgerJournalizeTrans_ES
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Diário-razão
+            MenuItemName        #LedgerJournalizeReport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333982
+        PROPERTIES
+          Name                #Consolidate
+          Label               #@SYS333982
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Consolidar [Exportar para]
+            MenuItemType        #Action
+            MenuItemName        #LedgerConsolidate
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Consolidar [Importar de]
+            MenuItemType        #Action
+            MenuItemName        #LedgerConsolidate1
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Consolidar [Online]
+            MenuItemType        #Action
+            MenuItemName        #LedgerConsolidate2
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333983
+        PROPERTIES
+          Name                #CurrencyConversions
+          Label               #@SYS333983
+        ENDPROPERTIES
+        
+        MENU #@SYS333984
+          PROPERTIES
+            Name                #Post-conversionRecalculations
+            Label               #@SYS333984
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Estatísticas comerciais
+              MenuItemName        #BusinessStatisticsDef
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Lançamento em diário
+              MenuItemType        #Action
+              MenuItemName        #LedgerJournalizeTrans
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS333985
+          PROPERTIES
+            Name                #Reconciliation
+            Label               #@SYS333985
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Banco
+              MenuItemType        #Output
+              MenuItemName        #BankLedgerReconciliation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Cliente
+              MenuItemType        #Output
+              MenuItemName        #CustLedgerReconciliation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto
+              MenuItemType        #Output
+              MenuItemName        #TaxReport_LedgerReconciliation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Fornecedor
+              MenuItemType        #Output
+              MenuItemName        #VendLedgerReconciliation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS333986
+          PROPERTIES
+            Name                #Settlements
+            Label               #@SYS333986
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Cliente
+              MenuItemType        #Output
+              MenuItemName        #CustReport_CheckSettlement
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Estoque
+              MenuItemType        #Output
+              MenuItemName        #InventCheckSettlement
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Fornecedor
+              MenuItemType        #Output
+              MenuItemName        #VendReport_CheckSettlement
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Conversão de moeda contábil do razão
+            MenuItemName        #ConvCompanyCurrency
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Conversão de moeda de relatório do razão
+            MenuItemName        #ConvLedgerReportingCurrency
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Verificar transações do razão
+            MenuItemType        #Output
+            MenuItemName        #LedgerCheckTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS113270
+        PROPERTIES
+          Name                #CashReceiptsManagement
+          Label               #@GLS113270
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Cash receipts
+            MenuItemName        #CashReceiptTableLV
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333987
+        PROPERTIES
+          Name                #CurrencyRequirement
+          Label               #@SYS333987
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Calcular previsões de fluxo de caixa
+            MenuItemType        #Action
+            MenuItemName        #LedgerCovTotal
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Necessidade de moeda
+            MenuItemName        #LedgerCurrencyReqUpdate
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333988
+        PROPERTIES
+          Name                #DataExport
+          Label               #@SYS333988
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Exportação de dados
+            MenuItemName        #LedgerGDPdUDataExport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupos de definições de exportação de dados
+            MenuItemName        #LedgerGDPdUGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333989
+        PROPERTIES
+          Name                #FiscalYearClose
+          Label               #@SYS333989
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Folha de fechamento
+            MenuItemName        #LedgerClosingSheet
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Folhas de abertura
+            MenuItemName        #LedgerOpeningSheet_ES
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Transações de abertura
+            MenuItemType        #Action
+            MenuItemName        #LedgerTransferOpening
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Processamento de final de ano para ordem de compra
+            MenuItemType        #Action
+            MenuItemName        #PurchOrderYearEndProcess
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Ledger accounts renaming
+            MenuItemName        #LedgerAccountRenameTable_RU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Commitment close
+            MenuItemName        #PurchCommitmentClose_PSN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS103227
+        PROPERTIES
+          Name                #Translation_RU
+          Label               #@GLS103227
+          ConfigurationKey    #LedgerBasic
+          CountryRegionCodes  #RU
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Translation sessions
+            MenuItemName        #RTSLSessionTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333990
+        PROPERTIES
+          Name                #CleanUp
+          Label               #@SYS333990
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Limpar diários-razão
+            MenuItemType        #Action
+            MenuItemName        #LedgerJournalCleanUp
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333991
+        PROPERTIES
+          Name                #Report347
+          Label               #@SYS333991
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Declaração 347
+            MenuItemName        #TaxReport347Table
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333992
+        PROPERTIES
+          Name                #SalesTaxPayments
+          Label               #@SYS333992
+        ENDPROPERTIES
+        
+        MENU #@SYS333993
+          PROPERTIES
+            Name                #Belgium
+            Label               #@SYS333993
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Giro de fatura
+              MenuItemType        #Output
+              MenuItemName        #CustInvoiceVolume_BE
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Transações de imposto relativas a compras
+              MenuItemType        #Output
+              MenuItemName        #TaxPurchLedger
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Transações de imposto relativas a vendas
+              MenuItemType        #Output
+              MenuItemName        #TaxSalesLedger
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Lista de impostos
+              MenuItemType        #Output
+              MenuItemName        #TaxList_BE
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Transações de imposto
+              MenuItemType        #Output
+              MenuItemName        #TaxTrans_BE
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Transações de imposto - detalhes
+              MenuItemType        #Output
+              MenuItemName        #TaxTransDetail_BE
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto belga por cliente
+              MenuItemType        #Output
+              MenuItemName        #TaxAmountByCustomer_BE
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Imposto belga por fornecedor
+              MenuItemType        #Output
+              MenuItemName        #TaxAmountByVendor_BE
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Declaração de imposto EDIVAT
+              MenuItemName        #TaxEdivatGeneral
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Declaração de imposto INTERVAT
+              MenuItemName        #TaxIntervat
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Caixas adicionais de relatório de imposto
+              MenuItemName        #TaxReportExtraFieldsBE
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Caixas de relatório BAS adicionais
+            MenuItemName        #TaxReportExtraFields
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #BAS australiano
+            MenuItemType        #Action
+            MenuItemName        #TaxReporting_AU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Log da declaração eletrônica de impostos
+            MenuItemName        #TaxElectronicDeclaration
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS333994
+          PROPERTIES
+            Name                #Netherlands
+            Label               #@SYS333994
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Declaração eletrônica ICP
+              MenuItemName        #TaxIntraCommTable_NL
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Declaração eletrônica OB
+              MenuItemName        #TaxTurnOverTable_NL
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Receber arquivos
+              MenuItemType        #Action
+              MenuItemName        #TaxBapiReceive_NL
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Relatório de imposto de compra
+            MenuItemType        #Action
+            MenuItemName        #TaxPurchaseTaxReporting
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Ajuste cambial do imposto
+            MenuItemType        #Action
+            MenuItemName        #TaxExchRateAdjUnrealized
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Ajustes cambiais do imposto
+            MenuItemName        #TaxExchRateAdjustment
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Pagamentos de imposto
+            MenuItemType        #Action
+            MenuItemName        #TaxReport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Posted sales tax editing
+            MenuItemName        #TaxTransUpdate
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS333995
+          PROPERTIES
+            Name                #Spain
+            Label               #@SYS333995
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Relatórios de IVA espanhol
+              MenuItemName        #TaxReportTable
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS333996
+          PROPERTIES
+            Name                #UnitedKingdom
+            Label               #@SYS333996
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Lista de vendas de encargos revertidos
+              MenuItemName        #RCSalesList_UK
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Generate GAF file
+            MenuItemType        #Action
+            MenuItemName        #TaxGSTAuditFileGeneration_MY
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #GAF purchase and supply preview
+            MenuItemName        #TaxGSTAuditFilePreview_MY
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS5060
+        PROPERTIES
+          Name                #WithholdingTax_IN
+          Label               #@GLS5060
+          CountryRegionCodes  #IN
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Withholding tax payment
+            MenuItemType        #Action
+            MenuItemName        #TaxWithholdReport_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Update certificate
+            MenuItemName        #TaxWithholdUpdateCertificate_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #TDS token numbers
+            MenuItemName        #TaxWithholdTDSProvisionalReceipt_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #TCS token numbers
+            MenuItemName        #TaxWithholdTCSProvisionalReceipt_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Update TDS payable certificate
+            MenuItemName        #TDSPayableCertificate_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333997
+        PROPERTIES
+          Name                #WithholdingTax
+          Label               #@SYS333997
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Pagamento de imposto retido na fonte
+            MenuItemType        #Action
+            MenuItemName        #TaxWithholdSettlement_TH
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Relatório de pagamento de imposto retido na fonte
+            MenuItemType        #Action
+            MenuItemName        #TaxWithholdReport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Posted withholding tax editing
+            MenuItemName        #TaxWithholdTransEditing
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333998
+        PROPERTIES
+          Name                #Zakat
+          Label               #@SYS333998
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Depreciação e ativos Zakat
+            MenuItemName        #AssetDepreciationZakat_SA
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Relatórios Zakat
+            MenuItemName        #LedgerReportZakat_SA
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Ajuste de transações Zakat
+            MenuItemName        #LedgerTransactionAdjustment_SA
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS306413
+        PROPERTIES
+          Name                #China
+          Label               #@SYS306413
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Chinese voucher continuity check
+            MenuItemType        #Action
+            MenuItemName        #LedgerVoucherContinuityCheck_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Chinese voucher print
+            MenuItemType        #Output
+            MenuItemName        #LedgerVoucher_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #GB/T 24589 Export
+            MenuItemType        #Action
+            MenuItemName        #GBTExportDataToXML_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS4081771
+        PROPERTIES
+          Name                #RLedgerTurnover
+          Label               #@SYS4081771
+          CountryRegionCodes  #RU
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Pre-calculate transactional data
+            MenuItemType        #Action
+            MenuItemName        #RLedgerTurnoverDataPrecalculation
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENUITEM
+        PROPERTIES
+          Name                #Update filter results for all derived financial hierarchies
+          MenuItemType        #Action
+          MenuItemName        #LedgerDerivedFinHierarchyRsultUpdate
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+    ENDMENU
+    MENU #@SYS333869
+      PROPERTIES
+        Name                #Setup
+        Label               #@SYS333869
+        NormalImage         #3478
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Parâmetros da contabilidade
+          MenuItemName        #LedgerParameters
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Fluxos de trabalho de contabilidade
+          MenuItemName        #WorkflowConfigurationLedger
+          IsDisplayedInContentArea    #Yes
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Razão
+          MenuItemName        #Ledger
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Motivos do razão
+          MenuItemName        #LedgerReasons
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Taxas de INPC
+          MenuItemName        #InpcRateTable_MX
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Calendários fiscais
+          MenuItemName        #FiscalCalendars
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Tax agent
+          MenuItemName        #TaxAgent
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Termo de abertura ou fechamento
+          MenuItemName        #LedgerOpenCloseTerm_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Caminho e nome de arquivo para XBRL
+          MenuItemType        #Action
+          MenuItemName        #LedgerXBRLProperties
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Advance adjustment parameters
+          MenuItemName        #AdvanceAdjustmentParameters_W
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Refinancing rate
+          MenuItemName        #LedgerRefinancingRates_RU
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Enterprise tax registration numbers
+          MenuItemName        #TaxRegistrationNumberTable_IN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Balance sheet definition
+          MenuItemName        #LedgerBalanceSheetDefinition
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Ledger statement definition
+          MenuItemName        #LedgerStatementDefinition
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Gerenciamento de impressão
+          MenuItemType        #Action
+          MenuItemName        #PrintMgmtGL_BR
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Item codes for SAD
+          MenuItemName        #PlSADFinanceItemAcc
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Threshold definitions
+          MenuItemName        #Threshold_IN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Maintain setoff hierarchy profiles
+          MenuItemName        #TaxReportSetOffHierarchySetup_IN
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Set up calculation for invoice issue due date
+          MenuItemName        #LedgerInvoiceIssueDueDateSetup_W
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Grupos de CFOP/NCM para Desoneração da Folha
+          MenuItemName        #PayrollDischargeGroup
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@GLS101575
+        PROPERTIES
+          Name                #RRG_W
+          Label               #@GLS101575
+          CountryRegionCodes  #RU,LT,LV,EE,CZ,HU,PL
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Gerador de relatórios financeiros
+            MenuItemName        #LedgerRRGReportTable_RU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Modelos de documento
+            MenuItemName        #LedgerRRGETemplates_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Seções padrão
+            MenuItemName        #LedgerRRGECommonSections_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Formato de requisitos
+            MenuItemName        #LedgerRRGEPropertyLayouts_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Consultas
+            MenuItemName        #LedgerRRGEQueries_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Funções
+            MenuItemName        #LedgerRRGEFunctions_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Requisitos fixos
+            MenuItemName        #LedgerRRGEProperties_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Delimitadores
+            MenuItemName        #LedgerRRGEDelimiters_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Períodos de aplicação de formatos
+            MenuItemName        #LedgerRRGEFormatPeriods_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Tipos de dados
+            MenuItemName        #LedgerRRGERequisiteTypes_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Configurações
+            MenuItemName        #LedgerRRGEDConfigurations_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333999
+        PROPERTIES
+          Name                #Currency
+          Label               #@SYS333999
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Moedas
+            MenuItemName        #Currency
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Tipos de taxa de câmbio
+            MenuItemName        #ExchangeRateType
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Taxas de câmbio de moedas
+            MenuItemName        #ExchangeRate
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Contas de reavaliação de moeda
+            MenuItemName        #CurrencyLedgerGainLossAccount
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Currency parameters
+            MenuItemName        #LedgerCurrencyParameters_RU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Moedas de denominação
+            MenuItemName        #CurrencyEuroDenomination
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Configurar provedores de taxa de câmbio
+            MenuItemName        #ExchangeRateProviderConfiguration
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Currency exchange rate types for sales tax
+            MenuItemName        #CurrencyExchangeRateTypesForSalesTax
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Exchange rate calculation rules for sales tax
+            MenuItemName        #ExchangeRateCurrencyPairCalculationRules
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Denominations
+            MenuItemName        #HuDenominations
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334000
+        PROPERTIES
+          Name                #ChartOfAccounts
+          Label               #@SYS334000
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Plano de contas
+            MenuItemName        #LedgerChartOfAccounts
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Configurar estruturas de conta
+            MenuItemName        #DimensionConfigureAccountStructure
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Estruturas de regra avançadas
+            MenuItemName        #DimensionConfigureAccountRuleStructure
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Categorias de conta principal
+            MenuItemName        #MainAccountCategory
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Modelos da conta principal
+            MenuItemName        #MainAccountTemplates
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Alias da conta contábil
+            MenuItemName        #LedgerAccountAlias
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupos de contas de consolidação
+            MenuItemName        #LedgerConsolidateAccountGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Contas de consolidação adicionais
+            MenuItemName        #MainAccountConsolidateAccount
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Importar contas principais
+            MenuItemType        #Action
+            MenuItemName        #LedgerAcctsImport_ES
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYP4310762
+        PROPERTIES
+          Name                #FinancialStatement
+          Label               #@SYP4310762
+          ConfigurationKey    #LedgerBalanceSheet
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Demonstrativo financeiro (tradicional)
+            MenuItemName        #LedgerBalanceSheetDim
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Definição de linha
+            MenuItemName        #LedgerRowDef
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Importar definições de demonstrativo financeiro
+            MenuItemType        #Action
+            MenuItemName        #LedgerAcctsFinancialStmtImport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334002
+        PROPERTIES
+          Name                #Dimensions
+          Label               #@SYS334002
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Dimensões financeiras
+            MenuItemName        #DimensionDetails
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Modelos padrão da dimensão financeira
+            MenuItemName        #FinancialDimensionDefaultTemplate
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Conjuntos de dimensões financeiras
+            MenuItemName        #DimensionFocusTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Associate derived financial hierarchies
+            MenuItemName        #LedgerDerivedFinHierarchyLegalEntities
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Derived financial hierarchies
+            MenuItemName        #LedgerDerivedFinHierarchies
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Configuração de dimensão financeira para integração de aplicativos
+            MenuItemName        #DimensionIntegrationConfiguration
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS63261
+        PROPERTIES
+          Name                #AsiaReport
+          Label               #@GLS63261
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Matrix account report
+            MenuItemName        #LedgerMatrixSetupSRS_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Matrix dimension report
+            MenuItemName        #DimensionMatrixSetupSRS_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334003
+        PROPERTIES
+          Name                #SalesTax
+          Label               #@SYS334003
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Códigos de imposto
+            MenuItemName        #TaxTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupos de impostos
+            MenuItemName        #TaxGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupos de impostos do item
+            MenuItemName        #TaxItemGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupos de lançamento contábil
+            MenuItemName        #TaxAccountGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Códigos de isenção do imposto
+            MenuItemName        #TaxExemptCodeTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Códigos de isenção permitidos por CST do IPI
+            MenuItemName        #TaxAllowedExemptCodeByIPI
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Jurisdições de impostos
+            MenuItemName        #TaxJurisdiction
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Autoridades do imposto
+            MenuItemName        #TaxAuthority
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Períodos de liquidação de imposto
+            MenuItemName        #TaxPeriod
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Configuração da declaração eletrônica de impostos
+            MenuItemName        #TaxElectronicDeclarationSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Certificados fiscais eletrônicos
+            MenuItemName        #TaxElectronicCertificates
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #NIP table
+            MenuItemName        #PlCustVendVatRegNums
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Natural resources tax groups
+            MenuItemName        #LvNRTaxItemGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Natural resources tax report setup
+            MenuItemName        #LvNRTaxReportSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #RCOAD codes
+            MenuItemName        #TaxAuthorityOKATO_RU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Códigos de categoria de impostos
+            MenuItemName        #TaxVatReportCategory_MX
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Declaração DIOT
+            MenuItemName        #DIOTDeclarationConcept_MX
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Tax branch
+            MenuItemName        #TaxBranch
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Sales tax document set
+            MenuItemName        #TaxUnrealizedDocuSetTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Códigos CFOP
+            MenuItemName        #CFOPTable_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Matriz de CFOP
+            MenuItemName        #CFOPMatrix_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupos de CFOP
+            MenuItemName        #CFOPGroup_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Código de tributação
+            MenuItemName        #TaxationCodeTable_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Matriz de impostos
+            MenuItemName        #taxesMatrix_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #CFPS de serviços
+            MenuItemName        #CFPSTable_BR
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #VAT report date codes
+            MenuItemName        #PlTaxDueTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Service tariff numbers
+            MenuItemName        #ServiceTariffNumber
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Facture operation codes
+            MenuItemName        #OperationTypeList_RU
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #GST relief category
+            MenuItemName        #TaxGSTReliefCategory_MY
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #GST relief group
+            MenuItemName        #TaxGSTReliefGroup_MY
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS334004
+          PROPERTIES
+            Name                #External
+            Label               #@SYS334004
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Tax reporting accounts
+              MenuItemName        #LedgerBadDebtAccounts_JP
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Códigos de relatório de imposto
+              MenuItemName        #TaxReportCollection
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Sales tax reporting XML codes
+              MenuItemName        #TaxReportXmlCodes_CZ
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #VAT Control Statement reporting XML codes
+              MenuItemName        #VATCSReportXmlCodes_CZ
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Supply codes
+              MenuItemName        #SupplyCodeTable_CZ
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Conta de reconciliação BAS adicional
+              MenuItemName        #TaxReportLedgerAccounts
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Números de isenção de imposto
+              MenuItemName        #TaxVATNumTable
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Código do motivo BAS PAYG
+              MenuItemName        #TaxPAYGVariationTable
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Códigos de motivo de benefícios extras no BAS
+              MenuItemName        #TaxFringeVariationTable
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Registros de imposto da Itália
+              MenuItemName        #TaxBook
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Seções de registro de imposto italiano
+              MenuItemName        #TaxBookSection
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Configuração de comunicação de imposto anual
+              MenuItemName        #TaxYearlyComSetup_IT
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Configuração de EDIVAT
+              MenuItemName        #TaxEdivatConfiguration
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Erros EDIVAT
+              MenuItemName        #TaxEdivatErrors
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Configuração de INTERVAT
+              MenuItemName        #TaxIntervatConfiguration
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Parâmetros de país/região
+              MenuItemName        #TaxCountryRegionParameters
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Configuração de relatório de ISR
+              MenuItemName        #ISRConcept_MX
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #VAT operation codes
+              MenuItemName        #VATOperationCodeTable_RU
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Tipos de registro de imposto
+              MenuItemName        #TaxRegistrationType
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Legislative types
+              MenuItemName        #TaxRegistrationLegislationTypes
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Italian domestic tax report threshold
+              MenuItemName        #TaxReportDomesticThreshold_IT
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Italian domestic tax report contracts
+              MenuItemName        #TaxReportDomesticcontract_IT
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #GST report configuration
+              MenuItemName        #TaxGSTReportConfiguration_MY
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Códigos de impostos da declaração de IVA
+              MenuItemName        #TaxReportExportTaxCodesMappings_EE
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS334005
+          PROPERTIES
+            Name                #Spain
+            Label               #@SYS334005
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Livros de IVA espanhol
+              MenuItemName        #TaxBookTable
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Contas contábeis de pagamento à vista
+              MenuItemName        #TaxReport347Account
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Listas de validação de 347
+              MenuItemName        #TaxReport347Validation
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS334006
+          PROPERTIES
+            Name                #Netherlands
+            Label               #@SYS334006
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Parâmetros da declaração eletrônica de imposto
+              MenuItemName        #TaxEvatParameters_NL
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Mensagens de erro na tributação eletrônica
+              MenuItemName        #TaxEvatError_NL
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS306042
+          PROPERTIES
+            Name                #India
+            Label               #@SYS306042
+            CountryRegionCodes  #IN
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Tax components
+              MenuItemName        #TaxComponentTable_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Tax ledger posting groups
+              MenuItemName        #TaxLedgerAccountGroup_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Excise tariff codes
+              MenuItemName        #ExciseTariffCodeTable_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Notification details
+              MenuItemName        #ExciseNotificationDetails_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Customs tariff codes
+              MenuItemName        #CustomsTariffCodeTable_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Service codes
+              MenuItemName        #ServiceCodeTable_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #VAT schedules
+              MenuItemName        #VATSchedule_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Form reference types
+              MenuItemName        #SalesTaxFormTypes_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Tax registration group
+              MenuItemName        #TaxRegistrationGroup_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Tax reporting code
+              MenuItemName        #TaxReportingCode_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Sales tax hierarchies
+              MenuItemName        #TaxReportHierarchyList_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Excise manufacturer or importer
+              MenuItemName        #ExciseManufactureImporterTable_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS334007
+        PROPERTIES
+          Name                #WithholdingTax
+          Label               #@SYS334007
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Códigos de impostos retidos na fonte
+            MenuItemName        #TaxWithholdTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupos de impostos retidos na fonte
+            MenuItemName        #TaxWithholdGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupos de impostos retidos na fonte do item
+            MenuItemName        #TaxWithholdItemGroup_TH
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupos de lançamento contábil
+            MenuItemName        #TaxWithholdAccountGroup_TH
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Autoridades de imposto retido na fonte
+            MenuItemName        #TaxWithholdAuthority_TH
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Período de liquidação de imposto retido na fonte
+            MenuItemName        #TaxWithholdPeriod_TH
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Tipos de receita de imposto retido na fonte
+            MenuItemName        #TaxWithholdRevenueTable_TH
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Configuração do relatório de imposto retido na fonte
+            MenuItemName        #TaxWithholdReportSetup_TH
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS306383
+          PROPERTIES
+            Name                #Brazil
+            Label               #@SYS306383
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Período de liquidação de imposto retido na fonte
+              MenuItemName        #TaxWithholdPeriod
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@GLS5000
+          PROPERTIES
+            Name                #India
+            Label               #@GLS5000
+            CountryRegionCodes  #IN
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Withholding tax component groups
+              MenuItemName        #TaxWithholdComponentGroupTable_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Withholding tax components
+              MenuItemName        #TaxWithholdComponentTable_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Withholding tax authorities
+              MenuItemName        #TaxWithholdAuthorities_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Withholding tax settlement periods
+              MenuItemName        #TaxWithholdPeriods_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Withholding tax concessions
+              MenuItemName        #TaxWithholdConcessionTable_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Recoverable certificates
+              MenuItemName        #TaxWithholdCertificate_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Withholding tax reporting codes
+              MenuItemName        #TaxWithholdReportingCodes_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Deductee country/region of residence
+              MenuItemName        #TaxWithholdCountryRegionToRemittance_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Nature of remittance for direct taxes
+              MenuItemName        #TaxWithholdNatureOfRemittance_IN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@GLS103982
+        PROPERTIES
+          Name                #ExpenseCodes_RU
+          Label               #@GLS103982
+          CountryRegionCodes  #RU
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Expense codes
+            MenuItemName        #RTax25ProfitTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Account interval groups
+            MenuItemName        #RTax25LedgerIntervalGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS103894
+        PROPERTIES
+          Name                #ProfitTax_RU
+          Label               #@GLS103894
+          CountryRegionCodes  #RU
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Sequence of calculation
+            MenuItemName        #RTax25StdSeq
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Counters
+            MenuItemName        #RTax25StdExpressionTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Rates
+            MenuItemName        #RTax25StdRateTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Sales tax relations
+            MenuItemName        #RTax25TaxTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Registers
+            MenuItemName        #RTax25RegisterTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Ledger posting groups of profit tax
+            MenuItemName        #RTax25LedgerAccountGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Debt interval
+            MenuItemName        #RTax25DebtPeriod
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS103666
+        PROPERTIES
+          Name                #Deferrals_RU
+          Label               #@GLS103666
+          ConfigurationKey    #LedgerBasic
+          CountryRegionCodes  #RU
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Deferrals groups
+            MenuItemName        #RDeferralsGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Value models
+            MenuItemName        #RDeferralsBookTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Writing off methods
+            MenuItemName        #RDeferralsProfileTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Perfis de lançamentos
+            MenuItemName        #RDeferralsLedger
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Sequence of calculation
+            MenuItemName        #RDeferralsStdSeq
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334008
+        PROPERTIES
+          Name                #Periods
+          Label               #@SYS334008
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Intervalos de datas
+            MenuItemName        #LedgerPeriodCode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Categorias do período de alocação
+            MenuItemName        #LedgerAllocateKey
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Checklist setup
+            MenuItemName        #LedgerCheckListSetup_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334009
+        PROPERTIES
+          Name                #Journals
+          Label               #@SYS334009
+        ENDPROPERTIES
+        
+        MENU #@GLS54962
+          PROPERTIES
+            Name                #VoucherTypeSetup_CN
+            Label               #@GLS54962
+            ConfigurationKey    #LedgerBasic
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Voucher type
+              MenuItemName        #LedgerVoucherType_CN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Print layout
+              MenuItemName        #LedgerPrintLayoutGroup_CN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Voucher type setup wizard
+              MenuItemName        #VoucherTypeWizard_CN
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Nomes de diário
+            MenuItemName        #LedgerJournalSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Descrições do diário
+            MenuItemName        #LedgerJournalTransTxt
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Diários de lançamento
+            MenuItemName        #LedgerPostingJournal
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Métodos de importação de demonstrativos de conta
+            MenuItemName        #LedgerImportMode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334010
+        PROPERTIES
+          Name                #Posting
+          Label               #@SYS334010
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Contas para transações automáticas
+            MenuItemName        #LedgerSystemAccounts
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Esquemas de competência
+            MenuItemName        #LedgerAccrualTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Liquidez
+            MenuItemName        #LedgerLiquidity
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Contas de controle de saldo
+            MenuItemName        #LedgerBalanceControlAccounts
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Contabilidade intercompanhia
+            MenuItemName        #LedgerInterCompany
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Imposto de compra
+            MenuItemName        #TaxPurchaseTaxTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Taxonomia XBRL
+            MenuItemName        #XBRLTaxonomy
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Regra de alocação do razão
+            MenuItemName        #LedgerAllocationRule
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Base de alocação do razão
+            MenuItemName        #LedgerAllocationBasisRule
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Regra de eliminação do razão
+            MenuItemName        #LedgerEliminationRule
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Definições de lançamento
+            MenuItemName        #JournalizingDefinition
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Definições de lançamento de transação
+            MenuItemName        #JournalizingDefinitionTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334011
+        PROPERTIES
+          Name                #Organization
+          Label               #@SYS334011
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Entidades legais
+            MenuItemName        #OMLegalEntities
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Unidades de negócios
+            MenuItemName        #OMBusinessUnit
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Centros de custos
+            MenuItemName        #OMCostCenter
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Departamentos
+            MenuItemName        #OMDepartment
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #GB/T 24589-2010
+            MenuItemName        #GBTParameters_CN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334012
+        PROPERTIES
+          Name                #Zakat
+          Label               #@SYS334012
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Códigos de item de Zakat
+            MenuItemName        #LedgerItemCodeZakat_SA
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Grupo de ativos Zakat
+            MenuItemName        #AssetGroupZakat_SA
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Nomes de relatórios Zakat
+            MenuItemName        #LedgerReportIndexZakat_SA
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS61428
+        PROPERTIES
+          Name                #Exim_IN
+          Label               #@GLS61428
+          CountryRegionCodes  #IN
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #EXIM ports
+            MenuItemName        #EximPorts_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #DEPB schedules
+            MenuItemName        #EximDEPBScheduleTable_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Incentive scheme groups
+            MenuItemName        #EximIncentiveSchemeGroup_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Duty drawback rates
+            MenuItemName        #EximDBKRates_IN
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@GLS103227
+        PROPERTIES
+          Name                #Translation_RU
+          Label               #@GLS103227
+          ConfigurationKey    #LedgerBasic
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Translation groups
+            MenuItemName        #RTSLRuleGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Ledger account rules
+            MenuItemName        #RTSLLedgerTransRule
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Currency groups
+            MenuItemName        #RTSLCurrencyRuleGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Inflation indexes
+            MenuItemName        #RTSLCurrencyIndex
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Dimension groups
+            MenuItemName        #RTSLDimensionRuleGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SPS105
+        PROPERTIES
+          Name                #Fund
+          Label               #@SPS105
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Funds
+            MenuItemName        #LedgerFund
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Fund types
+            MenuItemName        #LedgerFundType
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYP4311523
+        PROPERTIES
+          Name                #OverdueDebt
+          Label               #@SYP4311523
+          CountryRegionCodes  #PL
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Overdue debt journal calculation
+            MenuItemName        #OverdueJournalSettings_W
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENUITEM
+        PROPERTIES
+          Name                #RCOAD and RCM relation
+          MenuItemName        #LedgerRCOADtoRCM_RU
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+    ENDMENU
+  ENDMENU
+  
+
+***Element: PRN
+
+; Microsoft Dynamics AX Project : WELOZE_DesoneracaoFolhaPagamento unloaded
+; --------------------------------------------------------------------------------
+  PROJECTVERSION 2
+  
+  PROJECT #WELOZE_DesoneracaoFolhaPagamento
+  SHARED
+  PROPERTIES
+    Name                #WELOZE_DesoneracaoFolhaPagamento
+    Origin              #{916D4F0A-C80C-4843-8175-B0E63E771E76}
+  ENDPROPERTIES
+  
+    PROJECTCLASS ProjectNode
+    GROUP #Classes
+      PROPERTIES
+        Name                #Classes
+        ProjectGroupType    #Classes
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      ENDGROUP
+      
+    GROUP #DataDictionary
+      PROPERTIES
+        Name                #DataDictionary
+        ProjectGroupType    #DataDictionary
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Tables
+        PROPERTIES
+          Name                #Tables
+          ProjectGroupType    #Tables
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 44
+          UTILOBJECTID 113597
+          NODETYPE 204
+          NAME #PayrollDischargeGroup
+        ENDNODE
+        ENDGROUP
+        
+      GROUP #Extended Data Types
+        PROPERTIES
+          Name                #Extended Data Types
+          ProjectGroupType    #ExtendedDataTypes
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 41
+          UTILOBJECTID 103972
+          NODETYPE 228
+          NAME #PayrollDischargeEnabled
+        ENDNODE
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 41
+          UTILOBJECTID 103971
+          NODETYPE 228
+          NAME #PayrollDischargeGroupStatus
+        ENDNODE
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Forms
+      PROPERTIES
+        Name                #Forms
+        ProjectGroupType    #Forms
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 11
+        UTILOBJECTID 0
+        NODETYPE 201
+        NAME #PayrollDischargeGroup
+      ENDNODE
+      ENDGROUP
+      
+    GROUP #MenuItems
+      PROPERTIES
+        Name                #MenuItems
+        ProjectGroupType    #MenuItems
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      GROUP #Display
+        PROPERTIES
+          Name                #Display
+          ProjectGroupType    #Display
+          GroupMask           #
+          PreventEditProperties #No
+        ENDPROPERTIES
+        
+        BEGINNODE
+          FILETYPE 0
+          UTILTYPE 1
+          UTILOBJECTID 0
+          NODETYPE 296
+          NAME #PayrollDischargeGroup
+        ENDNODE
+        ENDGROUP
+        
+      ENDGROUP
+      
+    GROUP #Menus
+      PROPERTIES
+        Name                #Menus
+        ProjectGroupType    #Menus
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 16
+        UTILOBJECTID 0
+        NODETYPE 205
+        NAME #GeneralLedger
+      ENDNODE
+      ENDGROUP
+      
+  ENDPROJECT
+  
+
+***Element: END
